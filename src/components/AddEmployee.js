@@ -1,4 +1,8 @@
 import React, {useState} from "react";
+import { Form, Alert,InputGroup,Button, ButtonGroup } from "react-bootstrap";
+import  EmployeeDataService from "../services/Employee.services";
+import {Row, Col, Container} from "react-bootstrap";
+
 
 
 const AddEmployee =()=>{
@@ -25,32 +29,82 @@ const AddEmployee =()=>{
             email,
             status
         };
-        console.log(newEmployee)
+        console.log(newEmployee);
+        try{
+            await EmployeeDataService.addEmployees(newEmployee);
+            setMessage({error:false, msg: "new employee added succesful"});
+        } catch(err){
+            setMessage({error:true, msg:err.msg})
+        }
+        setName("");
+        setfirstName("");
+        setSurname("");
+        setEmail("");
+        setStatus("");
+        
     }
 
+    
+
     return(
-        <div className="container">
-            <form onSubmit={handleSubmit}>
-                <label>enter your name
-                <input type ="text" placeholder="name" value={name}onchange={(e)=>setName(e.target.value)}/><br></br>
-                </label>
-                <label>enter FirstName
-                <input type ="text" placeholder="name" value={surname}onchange={(e)=>setfirstName}/><br></br>
-                </label>
-                <label>enter Surname
-                <input type ="text" placeholder="name" value={name} onchange={(e)=>setName(e.target.value)}/><br></br>
-                </label>
-                <label>enter email
-                <input type ="text" placeholder="name" value={email} onchange={(e)=>setEmail(e.target.value)}/><br></br>
-                </label>
-                <label>enter status
-                <input type ="text" placeholder="name" value={status} onchange={(e)=>setStatus(e.target.value)}/><br></br>
-                </label>
-                <button id="btn" type="Submit">add/update</button>
-            </form>
+        <>
+        <div class ="p-box">
+        {message?.msg &&(<Alert variant={message?.error? "danger  ": "success"}dismissible onClose={()=> setMessage("")}
+        >
+            {message?.msg}
+        </Alert>)}
+     
+            <Form onSubmit={handleSubmit}>
+                <h3>New Employee</h3>
+                <Form.Group className="mb-3" controlId ="employeeForm">
+                    <InputGroup>
+                    <InputGroup.Text className="employeeForm">Name</InputGroup.Text>
+                    <Form.Control type="text" placeholder ="name"className="F-Group" value={name} onChange={(e)=>setName(e.target.value)} />
+            
+            </InputGroup>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId ="employeeForm">
+                    <InputGroup>
+                    <InputGroup.Text className ="employeeForm">Firstname</InputGroup.Text>
+                    <Form.Control type="text" placeholder ="firstName" className="F-Group"value={firstName}onChange={(e)=>setfirstName(e.target.value)}  />
+            
+            </InputGroup>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId ="employeeForm">
+                    <InputGroup>
+                    <InputGroup.Text className ="employeeForm">surname</InputGroup.Text>
+                    <Form.Control type="text" placeholder ="surname" className="F-Group" value={surname}onChange={(e)=>setSurname(e.target.value)} />
+            
+            </InputGroup>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId ="employeeForm">
+                    <InputGroup>
+                    <InputGroup.Text className ="employeeForm">Email</InputGroup.Text>
+                    <Form.Control type="text" placeholder ="email"className="F-Group" value={email} onChange={(e)=>setEmail(e.target.value)} />
+            
+            </InputGroup>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId ="employeeForm">
+                    <InputGroup>
+                    <InputGroup.Text className ="employeeForm">status</InputGroup.Text>
+                    <Form.Control type="text" placeholder ="status" className="F-Group"value={status}onChange={(e)=>setStatus(e.target.value)} />
+            
+            </InputGroup>
+            </Form.Group>
+            <ButtonGroup>
+                <Button variant="primary" type="Submit" className="btn">
+                    Add/Update
+                </Button>
+            </ButtonGroup>
+            </Form>
+            
+</div>
+            </>
             
             
-                   </div>
+                   
     )
 
     
