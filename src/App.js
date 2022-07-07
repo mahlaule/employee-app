@@ -7,7 +7,7 @@ import logo from './logo.svg';
 import './App.css';
 import AddEmployee from './components/AddEmployee';
 import EmployeeList from './components/EmployeeList';
-import {Form,Row, Col, Container} from "react-bootstrap";
+//import {Form,Row, Col, Container} from "react-bootstrap";
 
 
 function App() {
@@ -21,30 +21,22 @@ function App() {
   return (
     <div className="App">
       <div>
-      <Container style ={{width: "400px"}}>
-      <Row>
-      <Col>
-      <AddEmployee/>
-      </Col>
+      <div>
       
-      </Row>
+      
+      <AddEmployee id={employeeId} setEmployeeId={setEmployeeId}/>
+      
+      </div>
+      <div>
 
-      </Container>
-      <Container>
-
-        
-      <Row>
-      <Col>
-      <EmployeeList getE mployeeId ={getEmployeeIdHandler}/>
+   
+      <EmployeeList getEmployeeId ={getEmployeeIdHandler}/>
      
-      </Col>
-      
-      </Row>
-      </Container>
       
 
       </div>
      </div>
+     </div> 
   );
 }
 

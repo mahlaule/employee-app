@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Form, Alert,InputGroup,Button, ButtonGroup } from "react-bootstrap";
 import  EmployeeDataService from "../services/Employee.services";
 import {Row, Col, Container} from "react-bootstrap";
+import { async } from "@firebase/util";
 
 
 
-const AddEmployee =()=>{
+const AddEmployee =({id,setEmployeeId})=>{
     const [name, setName]= useState("");
     const  [firstName, setfirstName]= useState("");
     const [surname, setSurname]= useState("");
@@ -42,7 +43,30 @@ const AddEmployee =()=>{
         setEmail("");
         setStatus("");
         
+    };
+
+    const editHandler = async()=>{
+        setMessage("");
+        try{
+            const docSnap = await EmployeeDataService.getEmployee(id);
+            setName(docSnap.data().name);
+            setfirstName(docSnap.data().firstName);
+            setSurname(docSnap.data().surname);
+            setEmail(docSnap.data().email);
+            setStatus(docSnap.data().status);
+        }catch(err){
+            setMessage({error:true, msg:err.message});
+
+
+        }
     }
+    useEffect(()=>{
+        console.log("the id is here",id);
+        if (id !== undefined && id !== ""){
+            editHandler();
+        }
+
+    },[id]);
 
     
 

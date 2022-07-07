@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 
-import {Table, Button} from "react-bootstrap";
+//import {Table, Button} from "react-bootstrap";
 import  EmployeeDataService from "../services/Employee.services";
 import React, {useEffect, useState} from "react";
 import { doc } from "firebase/firestore";
@@ -31,23 +31,27 @@ return(
 
 
 <div>
-    <>
+    <div className="mb-2">
+        <button variant = "dark-edit" className ="refresh"onClick={getEmployees}>refresh list</button>
+    </div>
     
+    <div className="tables">
     
-    <Table stripped bordered hover size="sm">
-        <thead>
+    <table>
+        
 <tr>
 
 <th>#</th>
-<th>name</th>
-<th>firstName</th>
-<th>surname</th>
-<th>email</th>
-<th>status</th>
+<th>NAME</th>
+<th>FIRSTNAME</th>
+<th>SURNAME</th>
+<th>EMAIL</th>
+<th>STATUS</th>
+<th>ACTION</th>
 
 
 </tr>
-</thead>
+
 <tbody>
     {Employees.map((doc, index)=>{
         return(
@@ -59,12 +63,12 @@ return(
         <td>{doc.email}</td>
         <td>{doc.status}</td>
         <td>
-            <Button variant = "secondary" className="edit" onClick ={(e)=>getEmployeeId(doc.id)}>
+            <button variant = "secondary" className="edit" onClick ={(e)=>getEmployeeId(doc.id)}>
                 Edit
-            </Button>
-            <Button variant = "danger" className="delete"onClick ={(e)=>deleteHandler(doc.id)} >
+            </button>
+            <button variant = "danger" className="delete"onClick ={(e)=>deleteHandler(doc.id)} >
                 delete
-            </Button>
+            </button>
 
             </td>
             </tr>
@@ -74,9 +78,9 @@ return(
     
         
 </tbody>
-</Table>
+</table>
     
-    </>
+    </div>
    
 </div>
 
