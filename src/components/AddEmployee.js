@@ -6,13 +6,13 @@ import { async } from "@firebase/util";
 
 
 
-const AddEmployee =({id,setEmployeeId})=>{
+const AddEmployee =({id,setEmployeeId}  )=>{
     const [name, setName]= useState("");
     const  [firstName, setfirstName]= useState("");
     const [surname, setSurname]= useState("");
     const [email, setEmail]= useState("");
     const [status, setStatus]= useState("permanent");
-    const [flag, setFlag]=useState("true");
+    
     const [message, setMessage] = useState({error:false, msg:""})
 
     const handleSubmit =async (e)=>{
@@ -32,10 +32,20 @@ const AddEmployee =({id,setEmployeeId})=>{
         };
         console.log(newEmployee);
         try{
-            await EmployeeDataService.addEmployees(newEmployee);
-            setMessage({error:false, msg: "new employee added succesful"});
+            if(id !== undefined && id !== ""){
+                
+            await EmployeeDataService.updateEmployee(id,newEmployee);
+            setEmployeeId("");
+            setMessage({error:false, msg: "updated succesful"});
+           
+            }
+            else{
+                await EmployeeDataService.addEmployees(newEmployee);
+                setMessage({error:false, msg: "new employee added succesfully"});
+            }
+           
         } catch(err){
-            setMessage({error:true, msg:err.msg})
+            setMessage({error:true, msg:err.message});
         }
         setName("");
         setfirstName("");
@@ -48,7 +58,9 @@ const AddEmployee =({id,setEmployeeId})=>{
     const editHandler = async()=>{
         setMessage("");
         try{
+            
             const docSnap = await EmployeeDataService.getEmployee(id);
+            console.log("the record is", docSnap.data());
             setName(docSnap.data().name);
             setfirstName(docSnap.data().firstName);
             setSurname(docSnap.data().surname);

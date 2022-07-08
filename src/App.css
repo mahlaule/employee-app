@@ -2,7 +2,7 @@ body{
   background-color: gray;
 }
 .p-box{
-  background-color: white;
+  background-color: lightseagreen;
   border:5px solid peru;
   align-items: center;
   justify-content: center;
@@ -13,12 +13,14 @@ body{
 .mb-3{
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: lightseagreen;
   margin-left: 200px;
 }
 
 .employeeForm{
 margin-left: 120px;
+
+
 }
 
 .btn{
@@ -44,7 +46,7 @@ color:white;
   padding:8px;
   border-radius: 5px;
   background-color: white;
-  color:goldenrod;
+  border: 2px solid burlywood;
 }
 h3{
   margin-left:210px;
@@ -56,6 +58,7 @@ table {
   height: 200px;
   flex-direction: column row;
   color:white;
+  background-color:  lightseagreen;
 }
 .tables{
   margin-top:70px;

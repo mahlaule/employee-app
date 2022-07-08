@@ -10,9 +10,9 @@ addEmployees = (newEmployee)=>{
 
 
 }
-updateEmployee = (id,updateEmployee) =>{
-    const EmployeeDoc = doc(db,"Employee",id);
-    return updateDoc =(EmployeeDoc,updateDoc)
+updateEmployee = (id,updatedEmployee) =>{
+    const employeeDoc = doc(db,"Employee",id);
+    return updateDoc =(employeeDoc,updatedEmployee)
 };
 deleteEmployee = (id)=>{
     const EmployeeDoc = doc(db,"Employee",id);
