@@ -73,6 +73,7 @@ const AddEmployee =({id,setEmployeeId}  )=>{
         }
     }
     useEffect(()=>{
+     
         console.log("the id is here",id);
         if (id !== undefined && id !== ""){
             editHandler();
