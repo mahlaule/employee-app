@@ -24,7 +24,9 @@ const EmployeeList = ({getEmployeeId}) =>{
 const deleteHandler = async(id)=>{
     await EmployeeDataService.deleteEmployee(id);
     getEmployees();
-}
+};
+
+
 
 return(
 

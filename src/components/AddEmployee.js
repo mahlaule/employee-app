@@ -32,19 +32,27 @@ const AddEmployee =({id,setEmployeeId}  )=>{
         };
         console.log(newEmployee);
         try{
-            if(id !== undefined && id !== ""){
-                
-            await EmployeeDataService.updateEmployee(id,newEmployee);
+            if (id !== undefined && id !== ""){
+                await EmployeeDataService.updateEmployee(id,newEmployee); 
             setEmployeeId("");
-            setMessage({error:false, msg: "updated succesful"});
-           
-            }
-            else{
-                await EmployeeDataService.addEmployees(newEmployee);
+            
+                
+                setMessage({error:false, msg: "update succesfully"});
+               
+            }else{
+                await EmployeeDataService.addEmployees(newEmployee); 
+            
+                
                 setMessage({error:false, msg: "new employee added succesfully"});
+               
+
             }
            
-        } catch(err){
+           
+            }
+            
+           
+     catch(err){
             setMessage({error:true, msg:err.message});
         }
         setName("");

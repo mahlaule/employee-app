@@ -9,7 +9,7 @@ addEmployees = (newEmployee)=>{
 
 
 
-}
+};
 updateEmployee = (id,updatedEmployee) =>{
     const employeeDoc = doc(db,"Employee",id);
     return updateDoc =(employeeDoc,updatedEmployee)
